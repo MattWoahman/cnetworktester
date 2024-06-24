@@ -6,10 +6,13 @@ char* domainName = "parzival.ctcr.local";
 
 printf("What Horizon server do you want to test?\n");
 // add user input and assignment to variable
-printf("What do you want to test?")
+printf("What do you want to test?\n");
 //add test selection / tests
 
+char* testType = "network connection test";
 
+
+printf("You chose %s... is that correct? (y/n)\n", testType);
 // Connection test
 
 printf("Pinging %s ...\n\n", domainName); 
@@ -23,6 +26,5 @@ if (pingSuccess == 0) {
 }
 
 return 0;
-
 
 }
