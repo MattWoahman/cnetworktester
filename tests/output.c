@@ -13,6 +13,21 @@ int netcontest(char* domainName){
 }
 
 //need to see if I can override the function or make port have a default value (blast's port)
+//nvm i figured this out lol
+
+char *domainGet(void);
+
+char *domainGet(void){
+	printf("What is your domain/ip address?\n");
+	char buffer[50];
+	char* domainInput = fgets(buffer,50,stdin);
+	char* domainName = malloc(strlen(domainInput)-1 * sizeof(char));
+	for (int i = 0; i < (strlen(domainInput) - 1); i++) {
+		domainName[i] = domainInput[i];
+	}
+	return domainName;
+}
+
 int portcontest(char* domainName, int port);
 
 int blastServer(int port);
@@ -29,13 +44,7 @@ int agentservicetest(void);
 
 int main(void) {
 
-FILE* fp;
-
 int pingSuccess = 1;
-
-
-
-char testType;
 
 int input;
 int count = 0;
@@ -50,7 +59,6 @@ while ( yn != 'y') {
 	printf("2. Blast server\n");
 	printf("3. Trace route\n\n");
 
-	//add test selection / tests
 	fflush(stdin);
 	
 	input = fgetc(stdin);
@@ -64,14 +72,7 @@ while ( yn != 'y') {
 }
 fflush(stdin);
 if (input == '1'){
-	int dn;
-	printf("What is your domain/ip address?\n");
-	char buffer[50];
-	char* domainInput = fgets(buffer,50,stdin);
-	char domainName[strlen(domainInput)-1];
-	for (int i = 0; i < (strlen(domainInput) - 1); i++) {
-		domainName[i] = domainInput[i];
-	}
+	char* domainName = domainGet();
 	printf("%s is your domain name\n", domainName);
 	pingSuccess = netcontest(domainName);
 }
@@ -95,6 +96,7 @@ if (input == '2'){
 	printf("Your port is %d!\n", port);
 	blastTrue = blastServer(port);	
 }
+
 //add trcroute
 if (pingSuccess == 0) {
 	printf("Success! You can reach your domain!\n"); //change this to the ip/domain name
