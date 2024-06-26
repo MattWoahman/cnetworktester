@@ -19,9 +19,9 @@ char *domainGet(void);
 
 char *domainGet(void){
 	printf("What is your domain/ip address?\n");
-	char* buffer = malloc(50*sizeof(char));
+	char buffer[50];
 	char* domainInput = fgets(buffer,50,stdin);
-	char domainName[strlen(domainInput)-1];
+	char* domainName = malloc(strlen(domainInput)-1 * sizeof(char));
 	for (int i = 0; i < (strlen(domainInput) - 1); i++) {
 		domainName[i] = domainInput[i];
 	}
